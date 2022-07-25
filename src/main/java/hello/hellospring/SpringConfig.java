@@ -17,11 +17,10 @@ import hello.hellospring.service.MemberService;
 @Configuration
 public class SpringConfig {
 
-	@PersistenceContext
-	private EntityManager em;
+	private final MemberRepository memberRepository;
 
-	public SpringConfig(EntityManager em) {
-		this.em = em;
+	public SpringConfig(MemberRepository memberRepository) {
+		this.memberRepository = memberRepository;
 	}
 
 	@Bean
@@ -31,6 +30,6 @@ public class SpringConfig {
 
 	@Bean
 	public MemberRepository memberRepository() {
-		return new JpaMemberRepository(em);
+		return memberRepository;
 	}
 }
